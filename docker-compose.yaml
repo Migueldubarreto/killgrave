@@ -1,0 +1,19 @@
+
+version: '3.8'
+
+services:
+    mock:
+        image: friendsofgo/killgrave
+        ports:
+            - "3000:3000"
+        volumes: 
+            - ./mocks:/mocks
+        working_dir: /mocks
+        command: ["--host", "0.0.0.0", "--config", "config.yml"]
+        deploy:
+            resources:
+                limits:
+                    cpus: '0.5' # Limit to 50% of a CPU core
+                    memory: 512M # Limit to 512MB of memory
+                reservations:
+                    memory: 512M # Ensure at least 256MB of memory is available
